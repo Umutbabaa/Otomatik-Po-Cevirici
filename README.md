@@ -7,7 +7,7 @@ Kullanıcı dostu arayüzü sayesinde teknik bilgi gerektirmeden hızlı ve tuta
 <br>
 <p align="center">
   <img
-    src="https://github.com/user-attachments/assets/512fded2-349d-4dbf-b348-2d9e43f5b075"
+    src="https://github.com/user-attachments/assets/05d16e9f-5f45-43ff-966f-1cb0461d6bc2"
     alt="image"
     width="auto"
     height="auto"
