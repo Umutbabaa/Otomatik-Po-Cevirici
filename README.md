@@ -1,4 +1,4 @@
-## OTOMATİK PO ÇEVİRİCİ – GPT DESTEKLİ - Güncel Sürüm: v3.0.3 - 02 Ocak 2026 / 12:18:00
+## OTOMATİK PO ÇEVİRİCİ – GPT DESTEKLİ - Güncel Sürüm: v3.0.3 - 02 Ocak 2026 / 16:05:00
 
 Bu uygulama, .po uzantılı dil dosyalarını GPT destekli gelişmiş bir çeviri motoru kullanarak Türkçe ↔ İngilizce başta olmak üzere farklı diller arasında otomatik olarak çevirmenizi sağlar.
 Çeviri sürecinde mevcut çevirileri korur, yalnızca boş veya eksik msgstr alanlarını hedef alır ve dil dosyasının yapısını bozmadan güvenli bir şekilde güncelleme yapar.
