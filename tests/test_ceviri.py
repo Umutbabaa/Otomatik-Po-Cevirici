@@ -12,7 +12,7 @@ from ceviri import (
 )
 
 
-class TestCevirilmezMetin(unittest.TestCase):
+class TestCevirilmezMetin(unittest. TestCase):
     
     def test_url_algilandi(self):
         self.assertTrue(_cevirilmez_mi("https://example.com"))
@@ -36,6 +36,16 @@ class TestCevirilmezMetin(unittest.TestCase):
     def test_normal_metin_algilanmadi(self):
         self.assertFalse(_cevirilmez_mi("Hello world"))
         self.assertFalse(_cevirilmez_mi("Merhaba dünya"))
+
+    def test_tek_kelime_ui_metni_cevrilmeli(self):
+        self.assertFalse(_cevirilmez_mi("Save"))
+        self.assertFalse(_cevirilmez_mi("Login"))
+        self.assertFalse(_cevirilmez_mi("Submit"))
+
+    def test_teknik_terimler_korunmali(self):
+        self.assertTrue(_cevirilmez_mi("API_KEY"))
+        self.assertTrue(_cevirilmez_mi("USER_ID"))
+        self.assertTrue(_cevirilmez_mi("config.yml"))
 
 
 class TestYerTutucular(unittest.TestCase):
@@ -76,14 +86,26 @@ class TestModelCikti(unittest.TestCase):
         
     def test_bos_cikti_gecersiz(self):
         self.assertFalse(_ceviri_gecerli("Save file", ""))
-        
+
     def test_ayni_cikti_gecersiz(self):
         self.assertFalse(_ceviri_gecerli("Save", "Save"))
-        
+        self.assertFalse(_ceviri_gecerli("Login", "Login"))
+
+    def test_teknik_terim_ayni_cikti_gecerli(self):
+        self.assertTrue(_ceviri_gecerli("API", "API"))
+        self.assertTrue(_ceviri_gecerli("URL", "URL"))
+        self.assertTrue(_ceviri_gecerli("HTTP", "HTTP"))
+        self.assertTrue(_ceviri_gecerli("ID", "ID"))
+
     def test_cok_uzun_cikti_gecersiz(self):
         self.assertFalse(_ceviri_gecerli(
             "Save",
-            "A" * 100  # 3x'ten uzun
+            "A" * 26  # 5x'ten uzun (5 * 5 = 25)
+        ))
+        # 5x'e eşit veya altında geçerli
+        self.assertTrue(_ceviri_gecerli(
+            "Save",
+            "A" * 25  # Tam 5x
         ))
         
     def test_kotu_desenler_algilandi(self):
@@ -93,9 +115,9 @@ class TestModelCikti(unittest.TestCase):
         ))
         self.assertFalse(_ceviri_gecerli(
             "Save",
-            "Here is the translated text: Kaydet"
+            "Here is the translated text:  Kaydet"
         ))
 
 
-if __name__ == '__main__':
+if __name__ == '__main__': 
     unittest.main()
