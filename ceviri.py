@@ -73,7 +73,7 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
         dosya_handler,
-        logging. StreamHandler()
+        logging.StreamHandler()
     ]
 )
 
@@ -117,7 +117,7 @@ if os. path.exists(SOZLUK_DOSYASI):
         with open(SOZLUK_DOSYASI, "r", encoding="utf-8") as f:
             yuklenen = json.load(f)
             ozel_sozluk = {k: v for k, v in yuklenen.items() if not k.startswith("_")}
-        logger.info(f"Özel sözlük yüklendi: {len(ozel_sozluk)} terim")
+        logger.info(f"Özel sözlük yüklendi:  {len(ozel_sozluk)} terim")
     except Exception as e: 
         logger.warning(f"sozluk.json okunamadı:  {e}")
         ozel_sozluk = {}
@@ -194,7 +194,7 @@ def _ceviri_gecerli(kaynak: str, hedef: str) -> bool:
 
 def _context_al(entry) -> str:
     if entry. msgctxt:
-        return entry.msgctxt. strip()
+        return entry. msgctxt. strip()
     if entry.comment:
         return entry.comment. strip()
     return "__NO_CONTEXT__"
@@ -247,11 +247,11 @@ def cevir(
     except (ValueError, AttributeError):
         kaynak_dil = "English"
         hedef_dil = "Turkish"
-    logger.info(f"Çeviri:  {kaynak_dil} → {hedef_dil}")
+    logger.info(f"Çeviri: {kaynak_dil} → {hedef_dil}")
     hata_sayaci = defaultdict(int)
     try:
         gercek_api_anahtar = _api_anahtari_al(api_anahtar)
-        istemci = OpenAI(api_key=gercek_api_anahtar, timeout=30. 0)
+        istemci = OpenAI(api_key=gercek_api_anahtar, timeout=30.0)
     except ValueError as e:
         log_cb(f"❌ HATA: {e}")
         done_cb(0, 0, {"CONFIG_ERROR": 1})
@@ -277,7 +277,7 @@ def cevir(
                 cevrilen += 1
                 log_cb(f"↩ Çevrilmedi (sabit): {kaynak_metin}")
                 continue
-            if kaynak_metin in ozel_sozluk: 
+            if kaynak_metin in ozel_sozluk:
                 hedef_metin = ozel_sozluk[kaynak_metin]
                 entry.msgstr = hedef_metin
                 cevrilen += 1
@@ -403,7 +403,7 @@ def cevir(
                     _tercihler_counter = 0
             except Exception as e:
                 logger.error(f"Dosya kaydetme hatası: {e}")
-                log_cb(f"❌ HATA:  Dosya kaydedilemedi:  {e}")
+                log_cb(f"❌ HATA:  Dosya kaydedilemedi: {e}")
                 hata_sayaci["FILE_SAVE_ERROR"] += 1
         done_cb(cevrilen, atlanan, dict(hata_sayaci))
     except Exception as e:
@@ -437,7 +437,7 @@ def onizleme_cevir(
         done_cb(None)
         return None
     try:
-        po = polib. pofile(dosya_yolu)
+        po = polib.pofile(dosya_yolu)
         entries = [e for e in po if not e.translated() and (e.msgid or "").strip()]
         toplam = len(entries)
         if toplam == 0:
@@ -482,17 +482,17 @@ def onizleme_cevir(
                             f"Bağlam: {context if context != '__NO_CONTEXT__' else 'Yok'}\n\n"
                             f"METİN:\n{kaynak_metin}"
                         )
-                        yanit = istemci.chat.completions.create(
+                        yanit = istemci.chat.completions. create(
                             model=model,
                             messages=[
-                                {"role": "system", "content": "Yazılım UI metinleri çeviriyorsun. Sadece çeviriyi döndür, açıklama ekleme. "},
+                                {"role": "system", "content": "Yazılım UI metinleri çeviriyorsun. Sadece çeviriyi döndür, açıklama ekleme."},
                                 {"role": "user", "content": prompt}
                             ],
                             temperature=gelismis_ayarlar.get("temperature", 0.05),
                             max_tokens=gelismis_ayarlar.get("max_tokens", 500),
                             top_p=gelismis_ayarlar.get("top_p", 0.9)
                         )
-                        temiz = temizle_metin(yanit. choices[0].message.content)
+                        temiz = temizle_metin(yanit.choices[0].message.content)
                         if temiz and _yer_tutucular_uyumlu(kaynak_metin, temiz) and _ceviri_gecerli(kaynak_metin, temiz):
                             hedef_metin = temiz
                             break
@@ -538,7 +538,7 @@ def toplu_geri_al(log_cb, done_cb):
         log_cb("❌ Geri alınacak batch işlemi bulunamadı")
         done_cb(False)
         return
-    raporlar. sort(reverse=True)
+    raporlar.sort(reverse=True)
     son_rapor = os.path.join(REPORT_DIR, raporlar[0])
     try:
         with open(son_rapor, "r", encoding="utf-8") as f:
@@ -612,7 +612,7 @@ def cevir_klasor(
             progress_cb(toplam_oran * len(po_dosyalari), len(po_dosyalari))
         def _done(c, a, h):
             rapor["dosyalar"].append({
-                "dosya": os.path.basename(po_yolu),
+                "dosya": os. path.basename(po_yolu),
                 "cevrilen": c,
                 "atlanan": a,
                 "hatalar": h
