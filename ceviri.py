@@ -11,7 +11,7 @@ from datetime import datetime
 from collections import defaultdict
 from openai import OpenAI
 from dotenv import load_dotenv
-from helpers import temizle_metin
+from helpers import temizle_metin, bosluklari_koru
 
 load_dotenv()
 _durdur_olayi = threading.Event()
@@ -201,19 +201,15 @@ def _cevirilmez_mi(kaynak: str) -> bool:
     return False
 
 def _ceviri_gecerli(kaynak: str, hedef: str) -> bool:
-
     if not hedef or not hedef.strip():
         return False
 
-    if hedef.  strip() == kaynak.strip():
-        return False
-
-    if len(hedef) > len(kaynak) * 5:
+    if hedef.strip() == kaynak.strip():
         return False
 
     if _KOTU_DESENLER.search(hedef):
         return False
-    
+
     return True
 
 def _context_al(entry) -> str: 
@@ -345,7 +341,7 @@ def cevir(
 
                     prompt = (
                         "Sen profesyonel bir yazılım yerelleştirme uzmanısın.\n"
-                        "Bu metin üretim ortamındaki bir . po çeviri dosyasından.\n\n"
+                        "Bu metin üretim ortamındaki bir .po çeviri dosyasından.\n\n"
                         "KESİN KURALLAR:\n"
                         "1) SADECE çevrilmiş metni çıktı ver, açıklama ekleme.\n"
                         "2) Yer tutucuları AYNEN koru (%s, %1$s, {name}, {{count}}, [tag]).\n"
@@ -373,6 +369,7 @@ def cevir(
                     )
 
                     temiz = temizle_metin(yanit.choices[0].message.content)
+                    temiz = bosluklari_koru(kaynak_metin, temiz)
 
                     if not temiz:
                         logger.warning(f"Model boş çıktı döndü: {kaynak_metin}")
@@ -463,7 +460,7 @@ def cevir(
 
         if cevrilen > 0:
 
-            yeni_ad = os.path.splitext(dosya_yolu)[0] + f"_{yon}_CEVRILDI. po"
+            yeni_ad = os.path.splitext(dosya_yolu)[0] + f"_{yon}_CEVRILDI.po"
             try:
                 po. save(yeni_ad)
                 log_cb(f"✅ Kaydedildi: {yeni_ad}")
@@ -708,7 +705,7 @@ def cevir_klasor(
     ]
 
     if not po_dosyalari:
-        log_cb("❌ Klasörde . po bulunamadı.")
+        log_cb("❌ Klasörde .po bulunamadı.")
         done_cb(0, 0, {})
         return
 
